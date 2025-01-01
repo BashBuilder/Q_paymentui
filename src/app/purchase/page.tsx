@@ -6,13 +6,6 @@ import React from "react";
 import { toast } from "sonner";
 
 const page = () => {
-  const testing = "just added this "
-  const testing = "just added this "
-  const testing = "just added this "
-  const testing = "just added this "
-  const testing = "just added this "
-  const testing = "just added this "
-  const testing = "just added this "
   const paymentData: InitiatePaymentType = {
     client: {
       email: "test@gmail.com",
