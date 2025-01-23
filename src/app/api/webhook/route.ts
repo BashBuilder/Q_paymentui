@@ -33,9 +33,16 @@
 //   //   res.status(405).end(`Method ${req.method} Not Allowed`);
 //   // }
 // }
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 
 export function GET() {
   console.log("hello world");
   return NextResponse.json({ q: "Hello world! to payment backend" });
+}
+export async function POST(req: NextRequest) {
+  const body = await req.json();
+  const headers = await req.headers;
+  console.log(headers, headers);
+  console.log("hello world", body);
+  return NextResponse.json({ q: body });
 }
