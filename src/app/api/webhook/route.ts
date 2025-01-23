@@ -39,10 +39,11 @@ export function GET() {
   console.log("hello world");
   return NextResponse.json({ q: "Hello world! to payment backend" });
 }
-export async function POST(req: NextRequest) {
+export async function POST(req: NextRequest, res: NextResponse) {
   const body = await req.json();
   const headers = await req.headers;
-  console.log(headers, headers);
-  console.log("hello world", body);
-  return NextResponse.json({ q: body });
+  const responseHeaders = res.headers;
+  console.log("request headers", headers);
+  console.log("response headers", responseHeaders);
+  return NextResponse.json({ body });
 }
