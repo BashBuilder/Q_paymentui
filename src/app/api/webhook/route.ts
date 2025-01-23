@@ -33,3 +33,9 @@
 //   //   res.status(405).end(`Method ${req.method} Not Allowed`);
 //   // }
 // }
+import { NextResponse } from "next/server";
+
+export function GET() {
+  console.log("hello world");
+  return NextResponse.json({ q: "Hello world! to payment backend" });
+}
