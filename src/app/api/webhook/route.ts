@@ -1,11 +1,6 @@
 import { NextResponse, NextRequest } from "next/server";
 import crypto from "crypto";
 
-export function GET() {
-  console.log("hello world");
-  return NextResponse.json({ q: "Hello world! to payment backend" });
-}
-
 export async function POST(req: NextRequest) {
   const signature = req.headers.get("x-signature") || "";
   const rawBody = await req.json();
@@ -17,9 +12,6 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ isValid });
   }
 
-  console.log(isValid);
-  console.log(req.headers.get("x-signature"));
-
   return NextResponse.json({ finished: true });
 }
 
@@ -29,8 +21,6 @@ async function verifySignature(content: any, signature: string) {
   try {
     // Step 1: Get the public key from the provided URL
     const publicKey = process.env.NEXT_PUBLIC_WEBHOOK_API_KEY as string;
-    console.log(publicKey);
-
     // Step 2: Decode the Base64-encoded signature
     const decodedSignature = Buffer.from(signature, "base64");
 
@@ -43,11 +33,7 @@ async function verifySignature(content: any, signature: string) {
     // Step 5: Verify the signature using the public key
     const isVerified = verifier.verify(publicKey, decodedSignature);
 
-    if (isVerified) {
-      return true;
-    } else {
-      return false;
-    }
+    return isVerified;
   } catch (error) {
     console.error("Error verifying signature:", error);
     return false;
